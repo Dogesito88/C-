@@ -25,7 +25,7 @@ class Revista : public Publicacion{ //Herencia
     string periodicidad;
 
     public:
-    Revista() : Publicacion("Springer Nature", "12 de Agosto de 2017"), nombre("Nature"), numeroEjemplar(12), periodicidad("Semanal"){}
+    Revista() : Publicacion("Horizontes Ilimitados", "12 de Febrero de 2007"), nombre("Perspectivas del Siglo"), numeroEjemplar(12), periodicidad("Mensual"){}
     Revista(string editorial, string fechaDePublicacion, string nombre, int numeroEjemplar, string periodicidad): Publicacion(editorial, fechaDePublicacion), nombre(nombre), numeroEjemplar(numeroEjemplar), periodicidad(periodicidad) {}
     ~Revista(){}
     void mostrar() {
@@ -43,7 +43,7 @@ class Libro : public Publicacion{ //Herencia
     string nombreAutor;
     string titulo;
     public:
-    Libro() : Publicacion("Ediciones SM México", "13 de Abril de 2007"), codigoISBN(1234567890123), nombreAutor("Alejandro Pajaro"), titulo("La antigua noche"){}
+    Libro() : Publicacion("Ediciones SM Mexico", "13 de Diciembre de 2023"), codigoISBN(3210987654321), nombreAutor("David Cardona"), titulo("El Eco de las Estrellas Perdidas"){}
     Libro(string editorial, string fechaDePublicacion,long long codigoISBN, string nombreAutor, string titulo): Publicacion(editorial, fechaDePublicacion), codigoISBN(codigoISBN), nombreAutor(nombreAutor), titulo(titulo) {}
     ~Libro(){}
     long long getCodigo()  { return codigoISBN; }
