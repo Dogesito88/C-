@@ -5,15 +5,15 @@ class Alumno{
 
     protected:
 
-    int matricula;
+    int matricula,porcentaje;
     string nombre;
-    float promedio, porcentaje;
+    float promedio;
 
     public:
 
     ~Alumno(){}
-    Alumno(int matricula, string nombre, float promedio, float porcentaje) : matricula(matricula), nombre(nombre), promedio(promedio), porcentaje(porcentaje){}
-    Alumno(): matricula(202340256), nombre("Saul"), promedio(8.5), porcentaje(85){}
+    Alumno(int matricula, int porcentaje, string nombre, float promedio) : matricula(matricula), porcentaje(porcentaje),nombre(nombre), promedio(promedio){}
+    
 
     void calcularCuota(){
         if (promedio >= 9.0){
@@ -49,7 +49,7 @@ class Empleado{
 
     ~Empleado(){}
     Empleado(int id, int sueldo, string nombreC) : id(id), sueldo(sueldo), nombreC(nombreC){}
-    Empleado(): id(12), sueldo(7500), nombreC("Hector Nuñez") {}
+  
     int getID(){return id;}
     virtual int calcularSueldo() = 0; //Funcion virtual pura
     virtual void mostrar() = 0; //Funcion virtual pura
@@ -65,7 +65,7 @@ class Contador : public Empleado{//Herencia
 
     ~Contador(){}
     Contador(int id, int sueldo, string nombreC, int antiguedad) : Empleado( id, sueldo, nombreC), antiguedad(antiguedad) {}
-    Contador() : Empleado(13, 7500, "Armando Mendez") , antiguedad(1){}
+   
     int getID(){return id;}
     int calcularSueldo(){ return sueldo + (sueldo * 0.01)*antiguedad;}
 
@@ -88,7 +88,7 @@ class ProfesorTiempoCompleto : public Empleado{//Herencia
     public:
     ~ProfesorTiempoCompleto(){}
     ProfesorTiempoCompleto(int id, int sueldo, string nombreC, int bonoApoyo) : Empleado( id, sueldo, nombreC), bonoApoyo(bonoApoyo) {}
-    ProfesorTiempoCompleto() : Empleado(14, 7500, "Alejandro Acalli") , bonoApoyo(500){}
+   
     int getID(){return id;}
     int calcularSueldo(){return sueldo + bonoApoyo;}
     
@@ -108,7 +108,7 @@ class ProfesorHoraClase : public Empleado{//Herencia
 
     ~ProfesorHoraClase(){}
     ProfesorHoraClase(int id, int sueldo, string nombreC, int horas) : Empleado( id, sueldo, nombreC), horas(horas) {}
-    ProfesorHoraClase() : Empleado(12, 70, "David Cardona") , horas(108){}
+   
     int getID(){return id;}
     int calcularSueldo(){return ( sueldo*horas);}
 
@@ -129,7 +129,7 @@ class Escuela{
 
     public:
 
-	void agregarEmpleado(Empleado *, int pos );
+    void agregarEmpleado(Empleado *, int pos );
     void agregarAlumno(Alumno *, int pos );
     void mostrarAlumnos();
     void salarioTotal();
@@ -144,12 +144,12 @@ void Escuela::agregarAlumno(Alumno *x, int p) {
 void Escuela::mostrarAlumnos(){
     for (int i = 0; i < 3; ++i) { alumnos[i]->mostrarInformacion();}
 }
-void  Escuela::salarioTotal(){
+void Escuela::salarioTotal(){
     int totalSalarios = 0;
     for (int i = 0; i < 5; ++i) { if (empleados[i] != NULL) { totalSalarios += empleados[i]->calcularSueldo();}}
     cout << totalSalarios <<endl;
 }
- void Escuela::buscarEmpleado(int idb){
+void Escuela::buscarEmpleado(int idb){
     for (int i = 0; i < 5; ++i) { 
         if (empleados[i] != NULL && idb == empleados[i]->getID()) {
          cout << "\nEmpleado encontrado:" << endl;
@@ -167,11 +167,11 @@ int main(){
     escuela->agregarEmpleado(new Contador(14, 7500, "Armando Mendez", 1),3);
     escuela->agregarEmpleado(new ProfesorHoraClase(15, 70, "Juan Pablo", 80),4);
     
-    escuela->agregarAlumno(new Alumno(201, "Luis", 9.2, 80),0);
-    escuela->agregarAlumno(new Alumno(202, "Ana", 8.7, 90),1);
-    escuela->agregarAlumno(new Alumno(203, "Carlos", 7.8, 70),2);
+    escuela->agregarAlumno(new Alumno(201, 92,"Luis", 9.2),0);
+    escuela->agregarAlumno(new Alumno(202, 87, "Ana", 8.7),1);
+    escuela->agregarAlumno(new Alumno(203,78, "Carlos", 7.8),2);
 
-    cout<< "\nSalario total de todos los empleados\n";
+    cout<< "\nSalario total de todos los empleados:";
     escuela->salarioTotal();
 
     cout<< "\nPara buscar un empleado introduzca su ID: ";
@@ -184,5 +184,3 @@ int main(){
     escuela->mostrarAlumnos();
     return 0;
 }
-
-
