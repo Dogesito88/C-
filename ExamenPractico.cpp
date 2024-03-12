@@ -120,55 +120,69 @@ class ProfesorHoraClase : public Empleado{//Herencia
     }
 };//Clase Profesor hora clase
 
-int main(){
-   
-    int numE = 5; 
-    int numA = 3;
+class Escuela{
 
-    Empleado *empleados[numE];
-    empleados[0] = new Contador(11, 7500, "Francisco Hernandez",5);
-    empleados[1] = new ProfesorHoraClase(12, 70, "David Cardona",78);
-    empleados[2] = new ProfesorTiempoCompleto(13, 7500, "Alejandro Acalli",500);
-    empleados[3] = new Contador(14, 7500, "Armando Mendez",1);
-    empleados[4] = new ProfesorHoraClase(15, 70, "Juan Pablo",80);
-    
+    private:
 
+    Empleado *empleados[5];
+    Alumno *alumnos[3];
+
+    public:
+
+	void agregarEmpleado(Empleado *, int pos );
+    void agregarAlumno(Alumno *, int pos );
+    void mostrarAlumnos();
+    void salarioTotal();
+    void buscarEmpleado(int idb);
+};
+void Escuela::agregarEmpleado(Empleado *x, int p) {  
+	     empleados[p] = x;
+}
+void Escuela::agregarAlumno(Alumno *x, int p) {  
+	     alumnos[p] = x;
+}
+void Escuela::mostrarAlumnos(){
+    for (int i = 0; i < 3; ++i) { alumnos[i]->mostrarInformacion();}
+}
+void  Escuela::salarioTotal(){
     int totalSalarios = 0;
-    for (int i = 0; i < numE; ++i) {
-             if (empleados[i] != NULL) {
-            totalSalarios += empleados[i]->calcularSueldo();
+    for (int i = 0; i < 5; ++i) { if (empleados[i] != NULL) { totalSalarios += empleados[i]->calcularSueldo();}}
+    cout << totalSalarios <<endl;
+}
+ void Escuela::buscarEmpleado(int idb){
+    for (int i = 0; i < 5; ++i) { 
+        if (empleados[i] != NULL && idb == empleados[i]->getID()) {
+         cout << "\nEmpleado encontrado:" << endl;
+         empleados[i]->mostrar();
         }
+        else{cout << "\nEmpleado no encontrado" << endl;}
     }
+ }
 
-    // Mostrar el resultado
-    cout << "\nLa suma total de salarios de los empleados es: " << totalSalarios << endl;
+int main(){
+   Escuela *escuela = new Escuela();
+    escuela->agregarEmpleado(new Contador(11, 7500, "Francisco Hernandez", 5),0);
+    escuela->agregarEmpleado(new ProfesorHoraClase(12, 70, "David Cardona", 78),1);
+    escuela->agregarEmpleado(new ProfesorTiempoCompleto(13, 7500, "Alejandro Acalli", 500),2);
+    escuela->agregarEmpleado(new Contador(14, 7500, "Armando Mendez", 1),3);
+    escuela->agregarEmpleado(new ProfesorHoraClase(15, 70, "Juan Pablo", 80),4);
+    
+    escuela->agregarAlumno(new Alumno(201, "Luis", 9.2, 80),0);
+    escuela->agregarAlumno(new Alumno(202, "Ana", 8.7, 90),1);
+    escuela->agregarAlumno(new Alumno(203, "Carlos", 7.8, 70),2);
+
+    cout<< "\nSalario total de todos los empleados\n";
+    escuela->salarioTotal();
 
     cout<< "\nPara buscar un empleado introduzca su ID: ";
     int idb;
     cin >> idb;
-     
-    for (int i = 0; i < numE; ++i) {
-        if (empleados[i] != NULL && idb == empleados[i]->getID()) {
-            cout << "\nEmpleado encontrado:" << endl;
-            empleados[i]->mostrar();
-        }
-        else{
-            cout << "\nEmpleado no encontrado" << endl;
-        }
-    }
+    escuela->buscarEmpleado(idb);
 
     cout<< "\nListado de alumnos\n";
-    
-    Alumno *alumnos[numA];
-    alumnos[0] = new Alumno(201, "Luis", 9.2, 80);
-    alumnos[1] = new Alumno(202, "Ana", 8.7, 90);
-    alumnos[2] = new Alumno(203, "Carlos", 7.8, 70);
-
-
     // Mostrar información de los alumnos
-    for (int i = 0; i < numA; ++i) {
-        alumnos[i]->mostrarInformacion();
-    }
+    escuela->mostrarAlumnos();
+    return 0;
 }
 
 
