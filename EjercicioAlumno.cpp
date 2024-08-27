@@ -72,7 +72,7 @@ class Alumno{
 
     public:
     
-    Alumno(Maestro, string, int, int , string, string, string, string); //se añade el string del maestro
+    Alumno(Maestro, string, int, int , string, string, string, string); //se añade el maestro
 
     string devolverNombre();
     int devolverEdad();
