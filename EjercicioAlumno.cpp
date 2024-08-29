@@ -4,33 +4,6 @@ using namespace std;
 
 //Definición
 
-//<<-----Director----->>
-
-class Director{
-
-    private:
-
-    string nombre;
-    string facultad;
-    string diaAsignado;
-
-    public:
-    
-    Director(string, string, string);
-
-    string devolverNombre();
-    string devolverFacultad();
-    string devolverDiaAsignado();
-   
-    void obtenerNombre(string);
-    void obtenerMatricula(int);
-    void obtenerMateria(string);
-    void obtenerDiaAsignado(string);
-   
-   void mostrarCurso();
-   
-};
-
 // <<-----Maestro----->>
 
 class Maestro{
@@ -44,14 +17,37 @@ class Maestro{
 
     public:
     
-    Maestro(string, int, string, string);
+    Maestro(string, int, string);
 
     string devolverNombre();
     int devolverMatricula();
     string devolverMateria();
     string devolverDiaAsignado();
    
-   void mostrarCurso();
+   void capturarMateria(string);
+   void mostrarInfo();
+};
+
+//<<-----Director----->>
+
+class Director{
+
+    private:
+
+    string nombre;
+    string facultad;
+
+    public:
+    
+    Director(string, string);
+
+    string devolverNombre();
+    string devolverFacultad();
+   
+    void capturarNombre(string);
+    void capturarFacultad(string);
+   
+   void asignarMateria(Maestro& maestro,string);
    
 };
 
@@ -60,8 +56,7 @@ class Maestro{
 class Alumno{
 
     private:
-
-    Maestro maestro; 
+ 
     string nombre;
     int edad;
     int matricula;
@@ -72,7 +67,7 @@ class Alumno{
 
     public:
     
-    Alumno(Maestro, string, int, int , string, string, string, string); //se añade el maestro
+    Alumno(string, int, int , string, string, string, string); //se añade el maestro
 
     string devolverNombre();
     int devolverEdad();
@@ -89,13 +84,36 @@ class Alumno{
 
 //<<-----Director----->>
 
+Director :: Director(string nom, string f){
+    nombre = nom;
+    facultad = f;
+}
+
+string Director :: devolverNombre(){
+        return nombre;
+}
+
+string Director :: devolverFacultad(){
+        return facultad;
+}
+
+void Director:: capturarNombre(string nom){
+    nombre = nom;
+}
+
+void Director :: capturarFacultad(string f){
+    facultad = f;
+}
+
+void Director :: asignarMateria(Maestro& maestro,string mt){
+    maestro.capturarMateria(mt);
+}
 
 // <<-----Maestro----->>
 
-Maestro :: Maestro(string nom, int mtr, string mt, string a){
+Maestro :: Maestro(string nom, int mtr, string a){
     nombre = nom;
     matricula = mtr;
-    materia = mt;
     diaAsignado = a;
 }
 
@@ -115,9 +133,18 @@ string Maestro :: devolverDiaAsignado(){
         return diaAsignado;
 }
 
+void Maestro :: capturarMateria(string mt){
+    materia= mt;
+}
+
+void Maestro::mostrarInfo() {
+    cout << "Nombre del Profesor: " << devolverNombre() << endl;
+    cout << "Materia: " << devolverMateria() << endl;
+}
+
 //<<-----Alumno----->>
 
-Alumno :: Alumno(Maestro m,string nom, int ed, int mtr, string f, string mt1, string mt2, string mt3): maestro(m){ //inicializar maestro
+Alumno :: Alumno(string nom, int ed, int mtr, string f, string mt1, string mt2, string mt3){ 
     nombre = nom;
     edad = ed;
     matricula = mtr;
@@ -158,17 +185,19 @@ string Alumno :: devolverMateria3(){
 void Alumno::mostrarCurso() {
     cout << "Nombre del Alumno: " << devolverNombre() << endl;
     cout << "Materia 1: " << devolverMateria1() << endl;
-    cout << "Profesor: " << maestro.devolverNombre() << endl;
 }
 
 int main(){
 
-    Maestro j("Juan Perez", 123456, "Matematicas", "Lunes");
+    Maestro j("Juan Perez", 123456, "Lunes");
 
-    Alumno c(j,"Carlos Lopez", 20, 123456, "Ingenieria", "Matematicas", "Fisica", "Programacion");
+    Alumno c("Carlos Lopez", 20, 123456, "Ciencias de la computacion", "Matematicas", "Fisica", "Programacion");
 
+    Director d("Enrique", "Ciencias de la computación");
    
-    c.mostrarCurso();
+    d.asignarMateria(j,"Matematicas");
+
+    j.mostrarInfo();
 
     return 0;
 }
