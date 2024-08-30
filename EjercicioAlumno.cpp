@@ -25,7 +25,38 @@ class Maestro{
     string devolverDiaAsignado();
    
    void capturarMateria(string);
-   void mostrarInfo();
+   void mostrarInfoMaestro();
+};
+
+//<<-----Alumno----->>
+
+class Alumno{
+
+    private:
+ 
+    string nombre;
+    int edad;
+    int matricula;
+    string facultad;
+    string materia1;
+    string materia2;
+    string materia3;
+
+    public:
+    
+    Alumno(string, int, string, string, string, string); 
+
+    string devolverNombre();
+    int devolverEdad();
+    int devolverMatricula();
+    string devolverFacultad();
+    string devolverMateria1();
+    string devolverMateria2();
+    string devolverMateria3();
+   
+   void  capturarMatricula(int);
+   void mostrarInfoAlumno();
+   
 };
 
 //<<-----Director----->>
@@ -48,36 +79,7 @@ class Director{
     void capturarFacultad(string);
    
    void asignarMateria(Maestro& maestro,string);
-   
-};
-
-//<<-----Alumno----->>
-
-class Alumno{
-
-    private:
- 
-    string nombre;
-    int edad;
-    int matricula;
-    string facultad;
-    string materia1;
-    string materia2;
-    string materia3;
-
-    public:
-    
-    Alumno(string, int, int , string, string, string, string); //se añade el maestro
-
-    string devolverNombre();
-    int devolverEdad();
-    int devolverMatricula();
-    string devolverFacultad();
-    string devolverMateria1();
-    string devolverMateria2();
-    string devolverMateria3();
-   
-   void mostrarCurso();
+   void asignarMatricula(Alumno& alumno,int);
    
 };
 //Implementación
@@ -105,8 +107,14 @@ void Director :: capturarFacultad(string f){
     facultad = f;
 }
 
+// Metodo director-maestro
 void Director :: asignarMateria(Maestro& maestro,string mt){
     maestro.capturarMateria(mt);
+}
+
+// Metodo director-alumno
+void Director :: asignarMatricula(Alumno& alumno,int mtr){
+    alumno.capturarMatricula(mtr);
 }
 
 // <<-----Maestro----->>
@@ -137,17 +145,19 @@ void Maestro :: capturarMateria(string mt){
     materia= mt;
 }
 
-void Maestro::mostrarInfo() {
+void Maestro::mostrarInfoMaestro() {
     cout << "Nombre del Profesor: " << devolverNombre() << endl;
+    cout << "Matricula: " << devolverMatricula() << endl;
     cout << "Materia: " << devolverMateria() << endl;
+    cout << "Dia Asignado: " << devolverDiaAsignado() << endl;
+    cout << endl;
 }
 
 //<<-----Alumno----->>
 
-Alumno :: Alumno(string nom, int ed, int mtr, string f, string mt1, string mt2, string mt3){ 
+Alumno :: Alumno(string nom, int ed, string f, string mt1, string mt2, string mt3){ 
     nombre = nom;
     edad = ed;
-    matricula = mtr;
     facultad = f;
     materia1 = mt1;
     materia2 = mt2;
@@ -182,22 +192,34 @@ string Alumno :: devolverMateria3(){
     return materia3;
 }
 
-void Alumno::mostrarCurso() {
+
+void Alumno :: capturarMatricula(int mtr){
+    matricula= mtr;
+}
+
+void Alumno::mostrarInfoAlumno() {
     cout << "Nombre del Alumno: " << devolverNombre() << endl;
+    cout << "Edad: " << devolverEdad() << endl;
+    cout << "Matricula " << devolverMatricula() << endl;
     cout << "Materia 1: " << devolverMateria1() << endl;
+    cout << "Materia 2: " << devolverMateria2() << endl;
+    cout << "Materia 3: " << devolverMateria3() << endl;
+    cout << endl;
 }
 
 int main(){
 
-    Maestro j("Juan Perez", 123456, "Lunes");
+    Maestro m("Juan Perez", 123456, "Lunes");
 
-    Alumno c("Carlos Lopez", 20, 123456, "Ciencias de la computacion", "Matematicas", "Fisica", "Programacion");
+    Alumno a("Carlos Lopez", 18,"Ciencias de la computacion", "Matematicas", "Fisica", "Programacion");
 
     Director d("Enrique", "Ciencias de la computación");
    
-    d.asignarMateria(j,"Matematicas");
+    d.asignarMateria(m,"Matematicas");
+    d.asignarMatricula(a,202340256);
 
-    j.mostrarInfo();
+    m.mostrarInfoMaestro();
+    a.mostrarInfoAlumno();
 
     return 0;
 }
