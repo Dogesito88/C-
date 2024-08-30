@@ -80,6 +80,7 @@ class Director{
    
    void asignarMateria(Maestro& maestro,string);
    void asignarMatricula(Alumno& alumno,int);
+   void mostrarInfoDirector();
    
 };
 //Implementación
@@ -105,6 +106,12 @@ void Director:: capturarNombre(string nom){
 
 void Director :: capturarFacultad(string f){
     facultad = f;
+}
+
+void Director :: mostrarInfoDirector(){
+    cout << "Nombre del Director: " << devolverNombre() << endl;
+    cout << "Facultad: " <<    devolverFacultad() << endl;
+    cout << endl;
 }
 
 // Metodo director-maestro
@@ -213,11 +220,12 @@ int main(){
 
     Alumno a("Carlos Lopez", 18,"Ciencias de la computacion", "Matematicas", "Fisica", "Programacion");
 
-    Director d("Enrique", "Ciencias de la computación");
+    Director d("Enrique Hernandez", "Ciencias de la computación");
    
     d.asignarMateria(m,"Matematicas");
     d.asignarMatricula(a,202340256);
 
+    d.mostrarInfoDirector();
     m.mostrarInfoMaestro();
     a.mostrarInfoAlumno();
 
