@@ -13,7 +13,7 @@ public:
     Alumno();
 
     void mostrarCurso() const;
-    void operator+(const string& materia);
+    void operator=(const string& materia);
 };
 
 
@@ -29,7 +29,7 @@ void Alumno::mostrarCurso() const {
     cout << endl;
 }
 
-void Alumno::operator+(const string& nuevaMateria) {
+void Alumno::operator=(const string& nuevaMateria) {
     if (materia == "") {
         materia = nuevaMateria; 
     } else {
@@ -39,13 +39,13 @@ void Alumno::operator+(const string& nuevaMateria) {
 
 int main() {
    
-    Alumno alumno;
+    Alumno j;
 
-    alumno.mostrarCurso();
+    j.mostrarCurso();
 
-    alumno + "Matematicas";
+    j = "Matematicas";
     
-    alumno.mostrarCurso();
+    j.mostrarCurso();
 
     return 0;
 }
