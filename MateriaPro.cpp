@@ -27,7 +27,7 @@ class Alumno {
     public:
     
     Alumno(string);                
-    void operator+(Materia& nuevaMateria);  
+    Alumno& operator+(Materia& nuevaMateria);  
     friend ostream& operator << (ostream& out, const Alumno& a);
 
 };
@@ -48,13 +48,14 @@ Alumno::Alumno(string n){
     cantidadMaterias = 0;
 }
 
-void Alumno::operator+(Materia& nuevaMateria) {
+Alumno& Alumno::operator+(Materia& nuevaMateria) {
     if (cantidadMaterias < 10) {
         materias[cantidadMaterias] = &nuevaMateria;
         cantidadMaterias++;
     } else {
         cout << "No se pueden agregar más materias. Capacidad máxima alcanzada." << endl;
     }
+    return *this;
 }
 
 ostream& operator << (ostream& out, const Alumno& a) {
@@ -74,9 +75,7 @@ int main() {
     
     Alumno a("Juan");
 
-    a + mt; 
-    a + d; 
-    a + p;
+    a + mt + p + d;
 
     cout << a;
     
