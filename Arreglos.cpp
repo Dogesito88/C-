@@ -18,7 +18,7 @@ int main (){
 
     ap = &a[0]; // ap apunta a la direccion de a[0]
 
-    z = * ap; // A 'z' se le asigna el contenido de ap(a[0])
+    z = *ap; // A 'z' se le asigna el contenido de ap(a[0])
 
     *(ap + 1) = 100; //Se asigna al segundo elemento de 'a' el valor 100 usando ap
 
