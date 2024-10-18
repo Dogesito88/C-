@@ -70,14 +70,14 @@ ostream& operator << (ostream& out, const Alumno& a) {
 int main() {
   
     Materia mt("Matematicas");
-    Materia f("Fisica");
-    Materia q("Quimica");
+    Materia p("POO");
+    Materia d("DHPC");
     
     Alumno a("Juan");
 
     a + mt; 
-    a + f; 
-    a + q;
+    a + d; 
+    a + p;
 
     cout << a;
     
