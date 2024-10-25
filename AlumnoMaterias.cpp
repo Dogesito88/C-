@@ -1,0 +1,88 @@
+#include <iostream>
+#include <string>
+using namespace std;
+
+// <<-----Definicion----->>
+
+class Materia {
+    
+    private:
+    string nombre; 
+    
+    public:
+    
+    Materia();
+    Materia(string);  
+    string getNombre(); 
+
+};
+
+class Alumno {
+    
+    private:
+    
+    string nombre;          
+    Materia materias[5];  
+    int cantidadMaterias;   
+    
+    public:
+    
+    Alumno(string);                
+    void operator+( Materia& nuevaMateria);  
+    friend ostream& operator << (ostream& out,  Alumno& a);
+
+};
+
+// <<-----Implementacion----->>
+Materia::Materia() {
+    nombre = "";
+}
+
+Materia::Materia(string n) {
+    nombre = n;
+}
+
+string Materia::getNombre()  {
+    return nombre; 
+}
+
+
+Alumno::Alumno(string n){
+    nombre = n;
+    cantidadMaterias = 0;
+}
+
+void Alumno::operator+( Materia& nuevaMateria) {
+    if (cantidadMaterias < 5) {
+        materias[cantidadMaterias] = nuevaMateria;
+        cantidadMaterias++;
+    } else {
+        cout << "No se pueden agregar más materias. Capacidad máxima alcanzada." << endl;
+    }
+}
+
+ostream& operator << (ostream& out,  Alumno& a) {
+    out << "Alumno: " << a.nombre << endl;
+    out << "Materias inscritas:" << endl;
+    for (int i = 0; i < a.cantidadMaterias; ++i) {
+        out << i+1 << "- " << a.materias[i].getNombre() << endl;
+    }
+    return out; 
+}
+
+int main() {
+  
+    Materia mt("Matematicas");
+    Materia p("POO");
+    Materia d("DHPC");
+    
+    Alumno a("Juan");
+
+    a + mt; 
+    a + d; 
+    a + p;
+
+    cout << a;
+    
+    return 0;
+}
