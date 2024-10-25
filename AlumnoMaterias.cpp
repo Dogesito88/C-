@@ -34,6 +34,7 @@ class Alumno {
 };
 
 // <<-----Implementacion----->>
+
 Materia::Materia() {
     nombre = "";
 }
