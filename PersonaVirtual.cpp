@@ -15,7 +15,7 @@ class Persona{
 	public:
 	
 	Persona();
-	//Persona(string, int);
+	
 	string devolverNombre();
 	int devolverEdad();
 	virtual void capturarInfo(string, int);
@@ -35,7 +35,6 @@ class Maestro : public Persona{
     public:
     
     Maestro();
-    //Maestro(string, int, int, string, string);
 
     int devolverId();
     string devolverClase();
@@ -57,7 +56,6 @@ class Alumno : public Persona{
     public:
     
     Alumno();
-    //Alumno(string, int, int, string); 
 
     int devolverMatricula();
     string devolverFacultad();
@@ -77,8 +75,7 @@ class Director : public Persona{
 
     public:
     
-    Director();
-    //Director(string, int, string);
+    Director()
 
     string devolverFacultad();
     
